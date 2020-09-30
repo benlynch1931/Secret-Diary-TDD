@@ -4,4 +4,8 @@ class Diary
   def initialize
     @locked = true
   end
+
+  def unlock 
+
+  end
 end
