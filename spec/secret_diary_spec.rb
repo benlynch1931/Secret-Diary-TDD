@@ -4,6 +4,6 @@ describe Diary do
 
   it "returns locked status of diary" do
     subject = Diary.new
-    expect(subject).to eq "Locked"
+    expect(subject.locked).to eq true
   end
 end
