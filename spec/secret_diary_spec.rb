@@ -16,4 +16,11 @@ describe Diary do
     subject.unlock
     expect(subject.locked_status).to eq false
   end
+
+# For this, I had removed the init method to ensure lock method works
+  it "sets locked status to true when run .unlock" do
+    subject = Diary.new
+    subject.lock
+    expect(subject.locked_status).to eq true
+  end
 end
