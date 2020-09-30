@@ -6,6 +6,6 @@ class Diary
   end
 
   def unlock
-
+    @locked_status = false
   end
 end
