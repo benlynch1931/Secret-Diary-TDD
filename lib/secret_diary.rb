@@ -12,4 +12,7 @@ class Diary
   def lock
     @locked_status = true
   end
+
+  def add_entry
+  end
 end
