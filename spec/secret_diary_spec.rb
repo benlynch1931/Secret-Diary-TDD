@@ -6,4 +6,8 @@ describe Diary do
     subject = Diary.new
     expect(subject.locked).to eq true
   end
+
+  it "responds to an .unlock method" do
+    expect(subject).to respond_to(:unlock)
+  end
 end
