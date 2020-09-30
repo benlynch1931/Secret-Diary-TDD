@@ -23,4 +23,11 @@ describe Diary do
     subject.lock
     expect(subject.locked_status).to eq true
   end
+
+  it "sets locked status to true when run .unlock then .lock" do
+    subject = Diary.new
+    subject.unlock
+    subject.lock
+    expect(subject.locked_status).to eq true
+  end
 end
