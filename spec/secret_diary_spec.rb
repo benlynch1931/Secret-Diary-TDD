@@ -56,5 +56,9 @@ describe Diary do
     it "responds to an .get_entries method" do
       expect(subject).to respond_to(:get_entries)
     end
+
+    it "returns fasle to .get_entries as locked_status is true" do
+      expect(subject.get_entries).to eq false
+    end
   end
 end
