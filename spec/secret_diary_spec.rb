@@ -44,4 +44,8 @@ describe Diary do
     subject.unlock
     expect(subject.add_entry).to eq true
   end
+
+  it "responds to an .get_entries method" do
+    expect(subject).to respond_to(:get_entries)
+  end
 end
