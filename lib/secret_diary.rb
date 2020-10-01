@@ -5,7 +5,7 @@ class Diary
 
   def initialize
     @locked_status = true
-    entries = []
+    @entries = []
   end
 
   def unlock
@@ -20,7 +20,7 @@ class Diary
     if @locked_status == true
       return false
     else
-      return true
+      @entries.push(entry)
     end
   end
 

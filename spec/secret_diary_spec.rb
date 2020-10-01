@@ -44,16 +44,16 @@ describe Diary do
       expect(subject.add_entry).to eq false
     end
 
-    it "returns true to .add_entry when .unlock is run first" do
-      subject = Diary.new
-      subject.unlock
-      expect(subject.add_entry).to eq true
-    end
+    # it "returns true to .add_entry when .unlock is run first" do
+    #   subject = Diary.new
+    #   subject.unlock
+    #   expect(subject.add_entry).to eq true
+    # end
 
     it "adds an entry to the diary" do
       subject = Diary.new
       subject.unlock
-      expect(subject.add_entry("Entry 1")).to eq "Entry 1"
+      expect(subject.add_entry("Entry 1")).to eq ["Entry 1"]
     end
   end
 
