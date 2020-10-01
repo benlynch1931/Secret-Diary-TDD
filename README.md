@@ -8,7 +8,7 @@ The commits show my progression of TDD whilst creating this program.
 
 To run/check all tests are working:
 ```shell
-rspec
+rspec spec/secret_diary_spec.rb
 ```
 OR
 ```shell
