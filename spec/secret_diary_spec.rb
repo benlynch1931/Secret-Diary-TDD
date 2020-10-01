@@ -34,4 +34,8 @@ describe Diary do
   it "responds to an .add_entry method" do
     expect(subject).to respond_to(:add_entry)
   end
+
+  it "returns false to .add_entry as locked_status is true" do
+    expect(subject.add_entry).to eq false
+  end
 end
