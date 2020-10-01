@@ -55,6 +55,13 @@ describe Diary do
       subject.unlock
       expect(subject.add_entry("Entry 1")).to eq ["Entry 1"]
     end
+
+    it "adds two entry to the diary" do
+      subject = Diary.new
+      subject.unlock
+      subject.add_entry("Entry 1")
+      expect(subject.add_entry("Entry 2")).to eq ["Entry 1", "Entry 2"]
+    end
   end
 
   describe "#get_entries" do
