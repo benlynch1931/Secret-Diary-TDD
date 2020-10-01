@@ -38,4 +38,10 @@ describe Diary do
   it "returns false to .add_entry as locked_status is true" do
     expect(subject.add_entry).to eq false
   end
+
+  it "returns true to .add_entry when .unlock is run first" do
+    subject = Diary.new
+    subject.unlock
+    expect(subject.add_entry).to eq true
+  end
 end
