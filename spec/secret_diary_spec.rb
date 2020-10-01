@@ -57,8 +57,14 @@ describe Diary do
       expect(subject).to respond_to(:get_entries)
     end
 
-    it "returns fasle to .get_entries as locked_status is true" do
+    it "returns false to .get_entries as locked_status is true" do
       expect(subject.get_entries).to eq false
+    end
+
+    it "returns true to .get_entries when .unlock is run first" do
+      subject = Diary.new
+      subject.unlock
+      expect(subject.get_entries).to eq true
     end
   end
 end
