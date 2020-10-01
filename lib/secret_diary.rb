@@ -14,5 +14,8 @@ class Diary
   end
 
   def add_entry
+    if @locked_status == true
+      return false
+    end
   end
 end
