@@ -1,8 +1,11 @@
 class Diary
   attr_reader :locked_status
+  attr_reader :entries
+
 
   def initialize
     @locked_status = true
+    entries = []
   end
 
   def unlock
@@ -13,7 +16,7 @@ class Diary
     @locked_status = true
   end
 
-  def add_entry
+  def add_entry(entry = nil)
     if @locked_status == true
       return false
     else
