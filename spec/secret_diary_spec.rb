@@ -79,5 +79,13 @@ describe Diary do
       subject.unlock
       expect(subject.get_entries).to eq true
     end
+
+    it "`put`es entries added when .get_entry called" do
+      subject = Diary.new
+      subject.unlock
+      subject.add_entry("Entry 1")
+      subject.add_entry("Entry 2")
+      expect(subject.get_entries).to eq "Entries:\n \n Entry 1\n ----\n Entry 2\n ----"
+    end
   end
 end
