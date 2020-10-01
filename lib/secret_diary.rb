@@ -28,7 +28,11 @@ class Diary
     if @locked_status == true
       return false
     else
-      return true
+      puts "Entries: \n \n"
+      @entries.each { |entry|
+        puts entry
+        puts "----"
+      }
     end
   end
 end
