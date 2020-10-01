@@ -20,4 +20,8 @@ class Diary
       return true
     end
   end
+
+  def get_entries
+
+  end
 end
