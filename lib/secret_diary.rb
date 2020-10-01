@@ -22,6 +22,8 @@ class Diary
   end
 
   def get_entries
-
+    if @locked_status == true
+      return false
+    end
   end
 end
