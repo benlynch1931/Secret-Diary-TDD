@@ -1,36 +1,35 @@
-
+require_relative 'diary_access'
 class Diary
 
   def initialize
     @diary_access = DiaryAccess.new
-    @count = 0
-
+    @entries = []
   end
-  def add_entry(entry)
+
+  def add_entry(entry = nil)
     if @diary_access.lock_status == true
       return "Locked!"
     else
-      return "Unlocked!"
+      @entries.push(entry)
     end
   end
 
   def get_entries
     if @diary_access.lock_status == true
       return "Locked!"
+    else
+      puts "Entries: \n \n"
+      @entries.each { |entry|
+        puts entry
+        puts "----"}
     end
   end
 
   def locked_status
-    puts "Locked"
+    @diary_access.lock_status ? "Locked" : "Unlocked"
   end
 
   def access_diary
-    @count += 1
-    if @count % 2 == 0
-      @diary_access.lock
-    else
-      @diary_access.unlock
-    end
-
+    @diary_access.lock_status ? @diary_access.unlock : @diary_access.lock
   end
 end
