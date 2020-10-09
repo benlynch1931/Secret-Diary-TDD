@@ -10,9 +10,10 @@ describe DiaryAccess do
     subject.unlock
     # unlock once
     expect(subject.lock_status).to eq false
-    # lock and the nunlock again
+  end
+
+  it 'returns true lock status after .lock' do
     subject.lock
-    subject.unlock
-    expect(subject.lock_status).to eq false
+    expect(subject.lock_status).to eq true
   end
 end

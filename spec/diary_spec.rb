@@ -4,59 +4,65 @@ require 'diary_access'
 describe Diary do
 
   describe '#get_entries' do
+    let (:diary_access) { instance_double "diary_access" }
+    let (:subject) { Diary.new(diary_access) }
+
+    before do
+      allow(diary_access).to receive(:lock_status).and_return(true)
+    end
 
     it 'returns locked after initialize' do
       expect(subject.get_entries).to eq "Locked!"
     end
 
     it 'returns entries after unlock' do
-      subject.access_diary
-      # Called before adding entries
-      expect { subject.get_entries }.to output("Entries: \n \n").to_stdout
-      # called after adding entries
-      subject.add_entry("Entry 1")
-      subject.add_entry("Entry 2")
-      expect {subject.get_entries}.to output("Entries: \n \nEntry 1\n----\nEntry 2\n----\n").to_stdout
-    end
+      allow(diary_access).to receive(:lock_status).and_return(false)
 
-    it 'returns locked after .unlock then .lock' do
-      subject.access_diary
-      subject.get_entries
-      subject.access_diary
-      expect(subject.get_entries).to eq "Locked!"
+
+      2.times { subject.add_entry("New Message") }
+      expect {subject.get_entries}.to output("Entries: \n \nNew Message\n----\nNew Message\n----\n").to_stdout
     end
 
   end
 
   describe '#add_entry' do
+    let (:diary_access) { instance_double "diary_access" }
+    let (:subject) { Diary.new(diary_access) }
+
+    before do
+      allow(diary_access).to receive(:lock_status).and_return(true)
+    end
 
     it 'returns locked after initialize' do
       expect(subject.add_entry).to eq "Locked!"
     end
 
-    it 'returns array after unlock' do
-      subject.access_diary
-      # Call method and use default value
-      expect(subject.add_entry).to eq [nil]
-      # Call method and use given value
-      expect(subject.add_entry("Entry 1")).to eq [nil, "Entry 1"]
+    it 'adds entries after unlock' do
+      allow(diary_access).to receive(:lock_status).and_return(false)
+      expect(subject.add_entry("Entry 1")).to eq ["Entry 1"]
     end
 
-    it 'returns locked after .unlock then .lock' do
-      subject.access_diary
-      subject.add_entry("Entry 1")
-      subject.access_diary
-      expect(subject.add_entry).to eq "Locked!"
+  end
+
+  describe '#locked_status' do
+    let (:diary_access) { instance_double "diary_access" }
+    let (:subject) { Diary.new(diary_access) }
+
+    before do
+      allow(diary_access).to receive(:lock).and_return(true)
+      allow(diary_access).to receive(:unlock).and_return(false)
+      allow(diary_access).to receive(:lock_status).and_return(true)
     end
-  end
 
-  it 'returns locked status for diary instantiation' do
-    expect(subject.locked_status).to eq "Locked"
-  end
+    it 'puts locked on initialize' do
+      expect(subject.locked_status).to eq "Locked"
+    end
 
-  it 'returns unlocked status for diary after .unlock' do
-    subject.access_diary
-    expect(subject.locked_status).to eq "Unlocked"
+    it 'puts unlocked after .unlock' do
+      diary = Diary.new(DiaryAccess.new)
+      diary.access_diary
+      expect(diary.locked_status).to eq "Unlocked"
+    end
   end
 
 end

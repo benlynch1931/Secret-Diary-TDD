@@ -1,13 +1,13 @@
 require_relative 'diary_access'
 class Diary
 
-  def initialize
-    @diary_access = DiaryAccess.new
+  def initialize(diary_access)
+    @diary_access = diary_access
     @entries = []
   end
 
   def add_entry(entry = nil)
-    if @diary_access.lock_status == true
+    if @diary_access.lock_status
       return "Locked!"
     else
       @entries.push(entry)
@@ -15,7 +15,7 @@ class Diary
   end
 
   def get_entries
-    if @diary_access.lock_status == true
+    if @diary_access.lock_status
       return "Locked!"
     else
       puts "Entries: \n \n"
